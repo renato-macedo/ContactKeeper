@@ -1,14 +1,12 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+const connectDB = require('../config/db');
 
 // mongodb connection
-mongoose.connect('mongodb+srv://renato:123@cluster0-ubjaz.mongodb.net/contactkeeper?retryWrites=true&w=majority', {
-    useNewUrlParser: true 
-});
+connectDB();
 
 // json middleware
-app.use(express.json());
+app.use(express.json({ extended:  false }));
 
 // Define Routes
 app.use('/api/users', require('./routes/users'));
