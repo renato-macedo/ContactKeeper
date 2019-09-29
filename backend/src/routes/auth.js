@@ -42,14 +42,14 @@ router.post('/', async (req, res) => {
 
         // validate email
         if (!user) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
+            return res.status(200).json({ msg: 'Invalid Credentials' });
         }
 
         // validate password
         const isMatch = await bcrypt.compare(password, user.password);
 
         if(!isMatch) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
+            return res.status(200).json({ msg: 'Invalid Credentials' });
         }
 
         // if all credentials are valid then return the token
