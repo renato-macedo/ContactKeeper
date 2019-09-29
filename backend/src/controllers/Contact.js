@@ -43,9 +43,29 @@ module.exports = {
   },
 
   async update(req, res) {
+    const { name, email, phone, type } = req.body;
+    
+    const contactFields = {};
+    if (name) contactFields.name = name;
+    if (email) contactFields.email = email;
+    if (phone) contactFields.phone = phone;
+    if (type) contactFields.type = type;
+
     try {
-      await Contact.findByIdAndUpdate(req.params.id, req.body)
-      return res.json({ msg: "contact updated"})
+      let contact = await Contact.findById(req.params.id);
+      
+      if (!contact) return res.status(404).json({ msg: 'Contact not found' });
+
+      // Make sure user owns contact
+      if(contact.user.toString() !== req.user.id ) {
+        return res.status(401).json({ msg: 'Not authorized' });
+      }
+
+      contact = await Contact.findByIdAndUpdate(req.params.id,
+        { $set: contactFields },
+        { new: true });
+      
+      return res.json(contact);
     } catch (error) {
       console.error(error.message);
       return res.status(500).send('Server error');
@@ -54,8 +74,18 @@ module.exports = {
 
   async delete(req, res) {
     try {
-      await Contact.findByIdAndDelete(req.params.id);
-      return res.json({ msg: "contact deleted"})
+      let contact = await Contact.findById(req.params.id);
+      
+      if (!contact) return res.status(404).json({ msg: 'Contact not found' });
+
+      // Make sure user owns contact
+      if(contact.user.toString() !== req.user.id ) {
+        return res.status(401).json({ msg: 'Not authorized' });
+      }
+
+      await Contact.findByIdAndRemove(req.params.id);
+      
+      return res.json({ msg: "Contact removed"})
     } catch (error) {
       console.error(error.message);
       return res.status(500).send('Server error');
