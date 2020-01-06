@@ -1,6 +1,7 @@
-import React from 'react';
-import Contacts from '../contacts/Contacts';
-import ContactForm from '../contacts/ContactForm';
+import React from "react";
+import Contacts from "../contacts/Contacts";
+import ContactForm from "../contacts/ContactForm";
+import ContactFilter from "../contacts/ContactFilter";
 // import { Container } from './styles';
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
         <ContactForm />
       </div>
       <div>
+        <ContactFilter />
         <Contacts />
       </div>
     </div>
