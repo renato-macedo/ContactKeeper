@@ -20,18 +20,14 @@ export default function Login(props) {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
-  const { login, error, clearErrors, isAuthenticated } = authContext;
-  console.log(authContext);
+  const { login, error, clearErrors, isAuthenticated, loadUser } = authContext;
   const { setAlert } = alertContext;
   async function handleSubmit(data) {
-    console.log(data);
     login(data);
   }
 
   useEffect(() => {
-    console.log(isAuthenticated);
-    if (isAuthenticated) {
-      console.log(authContext);
+    if (localStorage.token) {
       props.history.push('/');
     }
     if (error === 'Invalid Credentials') {
