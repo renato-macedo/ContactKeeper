@@ -32,6 +32,7 @@ function AuthState(props) {
     }
 
     try {
+      console.log('request');
       const response = await axios.get('/api/auth');
       dispatch({
         type: USER_LOADED,
@@ -63,7 +64,7 @@ function AuthState(props) {
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: error.response.data.msg
+        payload: error.response.data.error
       });
     }
   }

@@ -29,15 +29,15 @@ export default function Register(props) {
   const { setAlert } = alertContext;
 
   useEffect(() => {
-    if (localStorage.token) {
+    if (localStorage.token || isAuthenticated) {
       props.history.push('/');
     }
 
-    if (error === 'User already exists') {
+    if (error) {
       setAlert(error, 'danger');
       clearErrors();
     }
-  }, [error, props.history]);
+  }, [error, props.history, isAuthenticated]); //
 
   function handleSubmit(data) {
     console.log(data);
