@@ -1,7 +1,7 @@
-import React, { useReducer } from "react";
-import uuid from "uuid";
-import ContactContext from "./contactContext";
-import ContactReducer from "./contactReducer";
+import React, { useReducer } from 'react';
+import uuid from 'uuid';
+import ContactContext from './ContactContext';
+import ContactReducer from './ContactReducer';
 import {
   ADD_CONTACT,
   DELETE_CONTACT,
@@ -10,24 +10,24 @@ import {
   UPDATE_CONTACT,
   FILTER_CONTACTS,
   CLEAR_FILTER
-} from "../types";
+} from '../types';
 
 function ContactState(props) {
   const initialState = {
     contacts: [
       {
         id: 1,
-        name: "Jill Johnson",
-        email: "jill@gmail.com",
-        phone: "111-111-1111",
-        type: "personal"
+        name: 'Jill Johnson',
+        email: 'jill@gmail.com',
+        phone: '111-111-1111',
+        type: 'personal'
       },
       {
         id: 2,
-        name: "Sara Watson",
-        email: "sara@gmail.com",
-        phone: "222-222-2221",
-        type: "professional"
+        name: 'Sara Watson',
+        email: 'sara@gmail.com',
+        phone: '222-222-2221',
+        type: 'professional'
       }
     ],
     current: null,

@@ -1,7 +1,7 @@
-import React, { Fragment, useContext } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import ContactContext from "../../context/contact/contactContext";
-import ContactItem from "./ContactItem";
+import React, { Fragment, useContext } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ContactContext from '../../context/contact/ContactContext';
+import ContactItem from './ContactItem';
 
 export default function Contacts() {
   const contactContext = useContext(ContactContext);

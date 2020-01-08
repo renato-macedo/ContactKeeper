@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
-import ContactContext from "../../context/contact/contactContext";
-import * as Yup from "yup";
+import React, { useState, useContext, useEffect } from 'react';
+import ContactContext from '../../context/contact/ContactContext';
+// import * as Yup from 'yup';
 // import { Container } from './styles';
 
 export default function ContactForm() {
@@ -18,19 +18,19 @@ export default function ContactForm() {
       setContact(current);
     } else {
       setContact({
-        name: "",
-        email: "",
-        phone: "",
-        type: "personal"
+        name: '',
+        email: '',
+        phone: '',
+        type: 'personal'
       });
     }
   }, [contactContext, current]);
 
   const [contact, setContact] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    type: "personal"
+    name: '',
+    email: '',
+    phone: '',
+    type: 'personal'
   });
 
   function onFieldChange(e) {
@@ -49,10 +49,10 @@ export default function ContactForm() {
   function addNewContact() {
     addContact(contact);
     setContact({
-      name: "",
-      email: "",
-      phone: "",
-      type: "personal"
+      name: '',
+      email: '',
+      phone: '',
+      type: 'personal'
     });
   }
 
@@ -70,7 +70,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="text-primary">
-        {current ? "Edit Contact" : "Add Contact"}
+        {current ? 'Edit Contact' : 'Add Contact'}
       </h2>
       <input
         name="name"
@@ -99,21 +99,21 @@ export default function ContactForm() {
         name="type"
         onChange={onFieldChange}
         value="personal"
-        checked={type === "personal"}
+        checked={type === 'personal'}
       />
-      Personal{" "}
+      Personal{' '}
       <input
         type="radio"
         name="type"
         onChange={onFieldChange}
         value="professional"
-        checked={type === "professional"}
-      />{" "}
+        checked={type === 'professional'}
+      />{' '}
       Professional
       <div>
         <input
           type="submit"
-          value={current ? "Update Contact" : "Add Contact"}
+          value={current ? 'Update Contact' : 'Add Contact'}
           className="btn btn-primary btn-block"
         />
       </div>
