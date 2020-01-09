@@ -57,6 +57,7 @@ export default function ContactForm() {
   }
 
   function updateCurrentContact() {
+    console.log('updating');
     updateContact(contact);
 
     clearCurrentContact();

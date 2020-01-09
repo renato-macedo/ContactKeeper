@@ -6,7 +6,7 @@ import ContactContext from '../../context/contact/ContactContext';
 export default function ContactItem({ contact }) {
   const contactContext = useContext(ContactContext);
 
-  const { id, name, email, phone, type } = contact;
+  const { _id, name, email, phone, type } = contact;
 
   const {
     deleteContact,
@@ -16,7 +16,7 @@ export default function ContactItem({ contact }) {
 
   function removeContact() {
     clearCurrentContact();
-    deleteContact(id);
+    deleteContact(_id);
   }
 
   function updateContact() {

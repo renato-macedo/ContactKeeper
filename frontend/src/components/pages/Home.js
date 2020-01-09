@@ -7,7 +7,7 @@ import AuthContext from '../../context/auth/AuthContext';
 
 export default function Home() {
   const authContext = useContext(AuthContext);
-  const { loadUser, isAuthenticated, logout } = authContext;
+  const { loadUser } = authContext;
   console.log(authContext);
 
   useEffect(() => {

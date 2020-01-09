@@ -1,12 +1,12 @@
 const { Contact, Validator } = require('../models/Contact');
 const { User } = require('../models/User');
 
-
-
 module.exports = {
   async getContacts(req, res) {
     try {
-      const contacts = await Contact.find({ user: req.user.id }).sort({ createdAt: -1 });
+      const contacts = await Contact.find({ user: req.user.id }).sort({
+        createdAt: -1
+      });
       return res.json(contacts);
     } catch (error) {
       console.error(error.message);
@@ -15,8 +15,8 @@ module.exports = {
   },
 
   async add(req, res) {
-    const { error } = Validator.validate(req.body)
-    
+    const { error } = Validator.validate(req.body);
+
     if (error) {
       const errorMessage = error.details[0].message;
       return res.status(400).json({ error: errorMessage });
@@ -44,7 +44,7 @@ module.exports = {
 
   async update(req, res) {
     const { name, email, phone, type } = req.body;
-    
+
     const contactFields = {};
     if (name) contactFields.name = name;
     if (email) contactFields.email = email;
@@ -53,18 +53,20 @@ module.exports = {
 
     try {
       let contact = await Contact.findById(req.params.id);
-      
-      if (!contact) return res.status(404).json({ msg: 'Contact not found' });
+
+      if (!contact) return res.status(404).json({ error: 'Contact not found' });
 
       // Make sure user owns contact
-      if(contact.user.toString() !== req.user.id ) {
-        return res.status(401).json({ msg: 'Not authorized' });
+      if (contact.user.toString() !== req.user.id) {
+        return res.status(401).json({ error: 'Not authorized' });
       }
 
-      contact = await Contact.findByIdAndUpdate(req.params.id,
+      contact = await Contact.findByIdAndUpdate(
+        req.params.id,
         { $set: contactFields },
-        { new: true });
-      
+        { new: true }
+      );
+
       return res.json(contact);
     } catch (error) {
       console.error(error.message);
@@ -75,20 +77,20 @@ module.exports = {
   async delete(req, res) {
     try {
       let contact = await Contact.findById(req.params.id);
-      
-      if (!contact) return res.status(404).json({ msg: 'Contact not found' });
+
+      if (!contact) return res.status(404).json({ error: 'Contact not found' });
 
       // Make sure user owns contact
-      if(contact.user.toString() !== req.user.id ) {
-        return res.status(401).json({ msg: 'Not authorized' });
+      if (contact.user.toString() !== req.user.id) {
+        return res.status(401).json({ error: 'Not authorized' });
       }
 
       await Contact.findByIdAndRemove(req.params.id);
-      
-      return res.json({ msg: "Contact removed"})
+
+      return res.json({ msg: 'Contact removed' });
     } catch (error) {
       console.error(error.message);
       return res.status(500).send('Server error');
     }
   }
-}
+};
